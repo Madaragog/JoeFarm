@@ -1,3 +1,2 @@
-import UIKit
+1499 / 10
 
-var str = "Hello, playground"
