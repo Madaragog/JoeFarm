@@ -54,6 +54,7 @@ while notEnoughMoney < 1499 {
 }
 print("I have enough money")
 
+
 // CORECTION PROPOSED
 
 // Le prix du voyage
@@ -85,3 +86,36 @@ while moneybis < pricebis {
 }
 
 print("Il aura fallu \(numberOfDaybis) jours à Joe pour économiser \(moneybis) €")
+
+
+// Solution proposed with the modulo operator
+
+// Le prix du voyage
+let price2 = 1499.0
+
+// Le nombre de jours pendant lesquels Joe doit économiser
+var numberOfDay2 = 0
+
+// L'argent de Joe
+var money2 = 0.0
+
+while money2 < price2 {
+    // Joe nourrit les vaches tous les jours
+    money2 -= 4
+    
+    if numberOfDay2 % 30 == 1 {
+        // Joe moissonne
+        money2 += 100 * 0.30
+    } else if numberOfDay2 % 30 == 10 || numberOfDay2 % 30 == 20 {
+        // Joe tonds les moutons
+        money2 += 30 * 1
+    } else {
+        // Joe vends son lait
+        money2 += 30 * 0.50
+    }
+    
+    // On passe au jour suivant
+    numberOfDay2 += 1
+}
+
+print("Il aura fallu \(numberOfDay2) jours à Joe pour économiser \(money2) €")
