@@ -14,11 +14,23 @@ let message = "Dear Joe, you'll need to save for \(result) to pay your \(price) 
 
 var money = 0.0
 
-for _ in 1...30 {
-    // Joe feeds the cows
+for day in 1...30 {
+    // Joe feeds the cows everyday
     money -= 4
-    // Joe sells milk
-    money += 30 * 0.50
+    
+    if day == 1 {
+        // Joe moisson
+        money += 100 * 0.30
+    } else if day == 10 || day == 20 {
+        // Joe vends laine de moutons
+        money += 30 * 1
+    } else {
+        //Joe sells milk
+        money += 30 * 0.50
+    }
 }
 
+
 print("\(money) €")// 330.0
+
+
