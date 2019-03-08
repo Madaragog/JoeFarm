@@ -5,7 +5,8 @@ let price : Double = 1499
  every day */
 let dailyBenefit = 10.0
 
-var result = price / dailyBenefit // 149
+let result = price / dailyBenefit // 149
 
 
+let message = "Dear Joe, you'll need to save for \(result) to pay your \(price) euros trip"
 
