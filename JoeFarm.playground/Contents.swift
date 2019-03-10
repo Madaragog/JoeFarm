@@ -1,121 +1,50 @@
-// Price for the trip
-let price : Double = 1499
+// Le prix du voyage
+let price = 1499.0
 
-/* Joe save 10 euros
- every day */
-let dailyBenefit = 10.0
-
-let result = price / dailyBenefit // 149
-
-
-let message = "Dear Joe, you'll need to save for \(result) to pay your \(price) euros trip"
-
-
-
+// L'argent de Joe
 var money = 0.0
 
-for day in 1...30 {
-    // Joe feeds the cows everyday
+// Le nombre de jours pendant lesquels Joe doit économiser
+var numberOfDay = 0
+
+// La grange de Joe : [lait, blé, laine]
+var barn = [0, 0, 0]
+
+while money < price {
+    // Joe nourrit les vaches tous les jours
     money -= 4
     
-    if day == 1 {
-        // Joe moisson
-        money += 100 * 0.30
-    } else if day == 10 || day == 20 {
-        // Joe vends laine de moutons
-        money += 30 * 1
-    } else {
-        //Joe sells milk
-        money += 30 * 0.50
+    // On calcule la taille de la grange
+    var barnSize = 0
+    for goods in barn {
+        barnSize += goods
     }
-}
-
-
-print("\(money) €")// 330.0
-
-var notEnoughMoney = 0.0
-
-while notEnoughMoney < 1499 {
-    for day in 1...30 {
-        // Joe feeds the cows everyday
-        notEnoughMoney -= 4
+    
+    if barnSize >= 500 {
+        // On vends !
+        money += Double(barn[0]) * 0.50 // Le lait
+        money += Double(barn[1]) * 0.30 // Le blé
+        money += Double(barn[2]) * 1 // La laine
         
-        if day == 1 {
-            // Joe moisson
-            notEnoughMoney += 100 * 0.30
-        } else if day == 10 || day == 20 {
-            // Joe vends laine de moutons
-            notEnoughMoney += 30 * 1
+        // On vide la grange
+        barn = [0, 0, 0]
+    } else {
+        // C'est une journée normale
+        
+        if numberOfDay % 30 == 1 {
+            // Joe moissonne
+            barn[1] += 100
+        } else if numberOfDay % 30 == 10 || numberOfDay % 30 == 20 {
+            // Joe tond les moutons
+            barn[2] += 30
         } else {
-            //Joe sells milk
-            notEnoughMoney += 30 * 0.50
+            // Joe trait les vaches
+            barn[0] += 30
         }
     }
-}
-print("I have enough money")
-
-
-// CORECTION PROPOSED
-
-// Le prix du voyage
-let pricebis = 1499.0
-
-// Le nombre de jours pendant lesquels Joe doit économiser
-var numberOfDaybis = 0
-
-// L'argent de Joe
-var moneybis = 0.0
-
-while moneybis < pricebis {
-    // Joe nourrit les vaches tous les jours
-    moneybis -= 4
-    
-    if numberOfDaybis == 1 {
-        // Joe moissonne
-        moneybis += 100 * 0.30
-    } else if numberOfDaybis == 10 || numberOfDaybis == 20 {
-        // Joe tonds les moutons
-        moneybis += 30 * 1
-    } else {
-        // Joe vends son lait
-        moneybis += 30 * 0.50
-    }
     
     // On passe au jour suivant
-    numberOfDaybis += 1
+    numberOfDay += 1
 }
 
-print("Il aura fallu \(numberOfDaybis) jours à Joe pour économiser \(moneybis) €")
-
-
-// Solution proposed with the modulo operator
-
-// Le prix du voyage
-let price2 = 1499.0
-
-// Le nombre de jours pendant lesquels Joe doit économiser
-var numberOfDay2 = 0
-
-// L'argent de Joe
-var money2 = 0.0
-
-while money2 < price2 {
-    // Joe nourrit les vaches tous les jours
-    money2 -= 4
-    
-    if numberOfDay2 % 30 == 1 {
-        // Joe moissonne
-        money2 += 100 * 0.30
-    } else if numberOfDay2 % 30 == 10 || numberOfDay2 % 30 == 20 {
-        // Joe tonds les moutons
-        money2 += 30 * 1
-    } else {
-        // Joe vends son lait
-        money2 += 30 * 0.50
-    }
-    
-    // On passe au jour suivant
-    numberOfDay2 += 1
-}
-
-print("Il aura fallu \(numberOfDay2) jours à Joe pour économiser \(money2) €")
+print("Il aura fallu \(numberOfDay) jours à Joe pour économiser \(money) €")
