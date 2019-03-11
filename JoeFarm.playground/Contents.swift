@@ -12,38 +12,51 @@ var barn = ["milk": 0, "wheat": 0, "wool": 0]
 
 func calculateBarnSize() -> Int {
     var barnSize = 0
+    
     for (_, count) in barn {
         barnSize += count
     }
     
     return barnSize
 }
-while money < price {
-    // Joe nourrit les vaches tous les jours
+
+func feedCows() {
     money -= 4
+}
+
+func sell() {
+    money += Double(barn["milk"]!) * 0.50
+    money += Double(barn["wheat"]!) * 0.30
+    money += Double(barn["wool"]!) * 1
     
-    // On calcule la taille de la grange
+    // On vide la grange
+    barn = ["milk": 0, "wheat": 0, "wool": 0]
+}
+
+func harvest() {
+    barn["wheat"]! += 100
+}
+
+func mowSheep() {
+    barn["wool"]! += 30
+}
+
+func milkCows() {
+    barn["milk"]! += 30
+}
+
+while money < price {
+    feedCows()
     
-    if calculateBarnSize() > 500 {
-        // On vends !
-        money += Double(barn["milk"]!) * 0.50 // Le lait
-        money += Double(barn["wheat"]!) * 0.30 // Le blé
-        money += Double(barn["wool"]!) * 1 // La laine
-        
-        // On vide la grange
-        barn = ["milk": 0,"wheat": 0,"wool": 0]
+    if calculateBarnSize() >= 500 {
+        sell()
     } else {
-        // C'est une journée normale
-        
         if numberOfDay % 30 == 1 {
-            // Joe moissonne
-            barn["wheat"]! += 100
+            harvest()
         } else if numberOfDay % 30 == 10 || numberOfDay % 30 == 20 {
-            // Joe tond les moutons
-            barn["wool"]! += 30
+            mowSheep()
         } else {
-            // Joe trait les vaches
-            barn["milk"]! += 30
+            milkCows()
         }
     }
     
@@ -51,8 +64,6 @@ while money < price {
     numberOfDay += 1
 }
 
+
 print("Il aura fallu \(numberOfDay) jours à Joe pour économiser \(money) €")
-
-
-
 
